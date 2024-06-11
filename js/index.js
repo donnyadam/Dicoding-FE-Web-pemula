@@ -22,7 +22,7 @@ document.addEventListener(RENDER_EVENT, function () {
 
   for (const bookItem of books) {
     const bookElement = makeBook(bookItem);
-    if (!bookItem.isCompleted)
+    if (!bookItem.isComplete)
       unreadBookList.append(bookElement);
     else
       readBookList.append(bookElement);
@@ -33,20 +33,20 @@ function makeBook(bookObject) {
   const textTitle = document.createElement('h2');
   textTitle.innerText = bookObject.title;
 
-  const textWriter = document.createElement('p');
-  textWriter.innerText = bookObject.writer;
+  const textauthor = document.createElement('p');
+  textauthor.innerText = bookObject.author;
 
   const textYear = document.createElement('p');
   textYear.innerText = bookObject.year;
 
   const textContainer = document.createElement('div');
   textContainer.classList.add('inner', 'col-9', 'ms-2');
-  textContainer.append(textTitle, textWriter, textYear);
+  textContainer.append(textTitle, textauthor, textYear);
 
   const divRow = document.createElement('div');
   divRow.classList.add('row');
 
-  if (bookObject.isCompleted) {
+  if (bookObject.isComplete) {
     const undoButton = document.createElement('button');
     undoButton.classList.add('button', 'undo-button', 'col');
 
@@ -98,7 +98,7 @@ function undo(bookId){
 
   if(bookTarget === null) return;
 
-  bookTarget.isCompleted = false;
+  bookTarget.isComplete = false;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
@@ -137,7 +137,7 @@ function done(bookId){
 
   if(bookTarget == null) return;
 
-  bookTarget.isCompleted = true;
+  bookTarget.isComplete = true;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
@@ -162,16 +162,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function addBook() {
   const title = document.getElementById('judul').value;
-  const writer = document.getElementById('penulis').value;
+  const author = document.getElementById('penulis').value;
   const year = document.getElementById('tahun').value;
 
   const generateID = +new Date();
   const bookObject = {
     id: generateID,
     title: title,
-    writer: writer,
-    year: year,
-    isCompleted: false
+    author: author,
+    year: parseInt(year),
+    isComplete: false
   };
   books.push(bookObject);
 
