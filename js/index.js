@@ -72,7 +72,7 @@ function makeBook(bookObject) {
     divRow.append(textContainer, undoButton, trashButton);
   } else {
     const checkButton = document.createElement('button');
-    checkButton.classList.add('button', 'check-button', 'col', 'me-4', 'rounded-circle');
+    checkButton.classList.add('button', 'check-button', 'col', 'rounded-circle');
 
     const icon = document.createElement('i');
     icon.classList.add('bi', 'bi-check-circle-fill', 'icon-100');
@@ -82,7 +82,18 @@ function makeBook(bookObject) {
       done(bookObject.id);
     });
 
-    divRow.append(textContainer, checkButton);
+    const trashButton = document.createElement('button');
+    trashButton.classList.add('button', 'trash-button', 'col', 'me-2');
+
+    const iconTrash = document.createElement('i');
+    iconTrash.classList.add('bi', 'bi-trash', 'icon-100');
+    trashButton.append(iconTrash);
+
+    trashButton.addEventListener('click', function () {
+      remove(bookObject.id);
+    });
+
+    divRow.append(textContainer, checkButton, trashButton);
   }
 
   const container = document.createElement('div');
