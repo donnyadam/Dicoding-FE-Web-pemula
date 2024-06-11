@@ -21,6 +21,19 @@
     border-radius: 20px;
 }
 
+.button{
+    background-color: transparent;
+    border: none;
+}
+
+.icon-100{
+    font-size: 50px;
+}
+
+.list-book{
+    width: 100%;
+}
+
 #add {
     width: 10%;
 }
